@@ -251,9 +251,11 @@ public class BluetoothLeService extends BluetoothService {
 
     private void readData(byte[] data) {
         final byte byteDelimiter = (byte) mConfig.characterDelimiter;
+        final boolean parseRead = mConfig.parseRead;
+        
         for (byte temp : data) {
 
-            if (temp == byteDelimiter) {
+            if (parseRead && (temp == byteDelimiter)) {
                 if (readBufferIndex > 0) {
                     dispatchBuffer(readBuffer, readBufferIndex);
                     readBufferIndex = 0;
@@ -267,6 +269,10 @@ public class BluetoothLeService extends BluetoothService {
             readBuffer[readBufferIndex] = temp;
             readBufferIndex++;
 
+        }
+        if (!parseRead && (readBufferIndex > 0)) {
+            dispatchBuffer(readBuffer, readBufferIndex);
+            readBufferIndex = 0;
         }
     }
 
