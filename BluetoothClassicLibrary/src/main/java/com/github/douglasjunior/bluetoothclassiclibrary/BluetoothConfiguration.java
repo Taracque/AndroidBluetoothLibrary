@@ -63,6 +63,12 @@ public class BluetoothConfiguration {
     public int bufferSize;
 
     /**
+     * Wheneever parse data on read. If set to false characterDelimiter will be ignored
+     * {@link com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService.OnBluetoothEventCallback#onDataRead(byte[], int)}
+     */
+    public boolean parseRead;
+
+    /**
      * Character delimiter to know if a data is received completly and call the
      * {@link com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService.OnBluetoothEventCallback#onDataRead(byte[], int)}
      */
